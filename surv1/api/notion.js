@@ -17,7 +17,12 @@ export default async function handler(req, res) {
         Respuesta: { title: [{ text: { content: body.Respuesta } }] },
       };
       Object.entries(body).forEach(([k, v]) => {
-        if (k !== "Respuesta" && v !== null) props[k] = { number: Number(v) };
+        if (k === "Respuesta" || v === null) return;
+        if (k === "comentario") {
+          props[k] = { rich_text: [{ text: { content: String(v) } }] };
+        } else {
+          props[k] = { number: Number(v) };
+        }
       });
 
       const r = await fetch("https://api.notion.com/v1/pages", {
