@@ -1,33 +1,26 @@
-export const config = { runtime: "edge" };
-
-export default async function handler(req) {
+export default async function handler(req, res) {
   const NOTION_TOKEN = process.env.NOTION_TOKEN;
   const NOTION_DB_ID = "7dfb9ef910744afbac29cbbb49f17b68";
 
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-  };
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: corsHeaders });
-  }
+  if (req.method === "OPTIONS") return res.status(204).end();
 
-  const url = new URL(req.url);
-  const action = url.searchParams.get("action");
+  const { action } = req.query;
 
   try {
     if (action === "save") {
-      const body = await req.json();
+      const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
       const props = {
         Respuesta: { title: [{ text: { content: body.Respuesta } }] },
       };
       Object.entries(body).forEach(([k, v]) => {
-        if (k !== "Respuesta" && v !== null) props[k] = { number: v };
+        if (k !== "Respuesta" && v !== null) props[k] = { number: Number(v) };
       });
 
-      const res = await fetch("https://api.notion.com/v1/pages", {
+      const r = await fetch("https://api.notion.com/v1/pages", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + NOTION_TOKEN,
@@ -36,15 +29,12 @@ export default async function handler(req) {
         },
         body: JSON.stringify({ parent: { database_id: NOTION_DB_ID }, properties: props }),
       });
-      const data = await res.json();
-      return new Response(JSON.stringify(data), {
-        status: res.status,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      const data = await r.json();
+      return res.status(r.status).json(data);
     }
 
     if (action === "load") {
-      const res = await fetch(`https://api.notion.com/v1/databases/${NOTION_DB_ID}/query`, {
+      const r = await fetch(`https://api.notion.com/v1/databases/${NOTION_DB_ID}/query`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + NOTION_TOKEN,
@@ -53,21 +43,12 @@ export default async function handler(req) {
         },
         body: JSON.stringify({ sorts: [{ timestamp: "created_time", direction: "ascending" }] }),
       });
-      const data = await res.json();
-      return new Response(JSON.stringify(data), {
-        status: res.status,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      const data = await r.json();
+      return res.status(r.status).json(data);
     }
 
-    return new Response(JSON.stringify({ error: "Unknown action" }), {
-      status: 400,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return res.status(400).json({ error: "Unknown action" });
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return res.status(500).json({ error: e.message });
   }
 }
