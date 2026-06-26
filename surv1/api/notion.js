@@ -10,19 +10,29 @@ export default async function handler(req, res) {
 
   const { action } = req.query;
 
+  // Parse body manually from stream
+  async function parseBody() {
+    return new Promise((resolve, reject) => {
+      if (req.body) {
+        resolve(typeof req.body === "string" ? JSON.parse(req.body) : req.body);
+        return;
+      }
+      let data = "";
+      req.on("data", chunk => { data += chunk; });
+      req.on("end", () => {
+        try { resolve(data ? JSON.parse(data) : {}); }
+        catch(e) { reject(e); }
+      });
+      req.on("error", reject);
+    });
+  }
+
   try {
     if (action === "save") {
-      if (req.method !== "POST") {
-        return res.status(405).json({ error: "Method not allowed" });
-      }
+      if (req.method !== "POST") return res.status(405).json({ error: "POST required" });
 
-      let body = req.body;
-      if (typeof body === "string") {
-        try { body = JSON.parse(body); } catch(e) { return res.status(400).json({ error: "Invalid JSON" }); }
-      }
-      if (!body || !body.Respuesta) {
-        return res.status(400).json({ error: "Missing body or Respuesta field" });
-      }
+      const body = await parseBody();
+      if (!body || !body.Respuesta) return res.status(400).json({ error: "Missing Respuesta" });
 
       const props = {
         Respuesta: { title: [{ text: { content: body.Respuesta } }] },
