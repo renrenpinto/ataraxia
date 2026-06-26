@@ -12,12 +12,23 @@ export default async function handler(req, res) {
 
   try {
     if (action === "save") {
-      const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+      if (req.method !== "POST") {
+        return res.status(405).json({ error: "Method not allowed" });
+      }
+
+      let body = req.body;
+      if (typeof body === "string") {
+        try { body = JSON.parse(body); } catch(e) { return res.status(400).json({ error: "Invalid JSON" }); }
+      }
+      if (!body || !body.Respuesta) {
+        return res.status(400).json({ error: "Missing body or Respuesta field" });
+      }
+
       const props = {
         Respuesta: { title: [{ text: { content: body.Respuesta } }] },
       };
       Object.entries(body).forEach(([k, v]) => {
-        if (k === "Respuesta" || v === null) return;
+        if (k === "Respuesta" || v === null || v === undefined) return;
         if (k === "comentario") {
           props[k] = { rich_text: [{ text: { content: String(v) } }] };
         } else {
@@ -53,6 +64,7 @@ export default async function handler(req, res) {
     }
 
     return res.status(400).json({ error: "Unknown action" });
+
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
