@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balance — Encuesta de marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#0b0b0b;color:#fff;font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:48px 24px 100px}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:56px}
+.logo-dot{width:8px;height:8px;background:#fefa8f;border-radius:50%;flex-shrink:0}
+.logo-text{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:#fefa8f}
+.prog{position:sticky;top:0;background:#0b0b0b;padding:12px 0 16px;z-index:10;margin-bottom:32px}
+.prog-track{height:1.5px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:#fefa8f;width:0%;transition:width .3s ease;border-radius:2px}
+.prog-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.28);letter-spacing:1.5px;text-transform:uppercase;margin-top:7px;text-align:right}
+.sec-title{font-family:'Archivo',sans-serif;font-weight:300;font-size:clamp(20px,5vw,34px);color:#fff;text-align:center;margin:52px 0 36px;line-height:1.15}
+.sec-title:first-child{margin-top:0}
+.sec-divider{border:none;border-top:0.5px solid rgba(255,255,255,0.1);margin-bottom:0}
+.qrow{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:16px 0;border-bottom:0.5px solid rgba(255,255,255,0.06)}
+.ql{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:clamp(8px,2vw,11px);color:#fefa8f;letter-spacing:2px;text-transform:uppercase;text-align:right;line-height:1.5}
+.qr{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:clamp(8px,2vw,11px);color:#fefa8f;letter-spacing:2px;text-transform:uppercase;text-align:left;line-height:1.5}
+.dots{display:flex;align-items:center;justify-content:center;gap:5px}
+.dot{border-radius:50%;cursor:pointer;flex-shrink:0;border:1.5px solid rgba(254,250,143,0.28);background:rgba(255,255,255,0.05);transition:background .12s,border-color .12s;-webkit-tap-highlight-color:transparent}
+.dot:hover{border-color:#fefa8f;background:rgba(254,250,143,0.1)}
+.dot.sel{background:#fefa8f;border-color:#fefa8f}
+.dot[data-v="1"]{width:40px;height:40px}
+.dot[data-v="2"]{width:30px;height:30px}
+.dot[data-v="3"]{width:22px;height:22px}
+.dot[data-v="4"]{width:12px;height:12px;border-width:1px}
+.dot[data-v="5"]{width:22px;height:22px}
+.dot[data-v="6"]{width:30px;height:30px}
+.dot[data-v="7"]{width:40px;height:40px}
+@media(max-width:420px){
+  .dot[data-v="1"]{width:30px;height:30px}
+  .dot[data-v="2"]{width:23px;height:23px}
+  .dot[data-v="3"]{width:17px;height:17px}
+  .dot[data-v="4"]{width:10px;height:10px}
+  .dot[data-v="5"]{width:17px;height:17px}
+  .dot[data-v="6"]{width:23px;height:23px}
+  .dot[data-v="7"]{width:30px;height:30px}
+  .dots{gap:3px}
+}
+.submit-area{margin-top:60px;text-align:center}
+.submit-btn{font-family:'Archivo',sans-serif;font-weight:500;font-size:16px;letter-spacing:-0.3px;color:#000;background:#fefa8f;border:none;padding:18px 64px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:opacity .15s}
+.submit-btn:hover{opacity:.88}
+.submit-btn:disabled{opacity:.2;cursor:not-allowed}
+.success{display:none;text-align:center;padding:80px 0}
+.success.on{display:block}
+.suc-title{font-family:'Archivo',sans-serif;font-weight:300;font-size:clamp(32px,8vw,48px);color:#fff;margin-bottom:12px}
+.suc-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#fefa8f}
+.tog-btn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.28);background:none;border:0.5px solid rgba(255,255,255,0.14);padding:10px 20px;cursor:pointer;margin:28px auto 0;display:block;transition:color .15s,border-color .15s}
+.tog-btn:hover{color:#fefa8f;border-color:rgba(254,250,143,0.35)}
+.resp-area{margin-top:40px;display:none}
+.resp-hdr{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:20px;text-align:center}
+.rent{border-bottom:0.5px solid rgba(255,255,255,0.06);padding:14px 0}
+.rname{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.22);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.rrow{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;margin-bottom:5px}
+.rl{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(254,250,143,0.45);letter-spacing:1px;text-transform:uppercase;text-align:right}
+.rr{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(254,250,143,0.45);letter-spacing:1px;text-transform:uppercase}
+.rdots{display:flex;align-items:center;gap:2px}
+.rdot{border-radius:50%;background:rgba(255,255,255,0.07);flex-shrink:0}
+.rdot[data-v="1"]{width:13px;height:13px}
+.rdot[data-v="2"]{width:10px;height:10px}
+.rdot[data-v="3"]{width:7px;height:7px}
+.rdot[data-v="4"]{width:4px;height:4px}
+.rdot[data-v="5"]{width:7px;height:7px}
+.rdot[data-v="6"]{width:10px;height:10px}
+.rdot[data-v="7"]{width:13px;height:13px}
+.rdot.sel{background:#fefa8f}
+.loading-msg{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.22);text-align:center;padding:20px 0}
+.error-msg{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(254,100,100,0.7);text-align:center;padding:20px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo"><span class="logo-dot"></span><span class="logo-text">Balance</span></div>
+  <div class="prog" id="prog">
+    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="prog-lbl" id="prog-lbl">0 / 19</div>
+  </div>
+  <div id="form"></div>
+  <div class="success" id="success">
+    <p class="suc-title">Gracias :)</p>
+    <p class="suc-sub">Tu visión de Balance queda registrada</p>
+    <button class="tog-btn" id="tog-btn">Ver respuestas del equipo</button>
+    <div class="resp-area" id="resp-area">
+      <p class="resp-hdr">Respuestas registradas</p>
+      <div id="resp-list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = "/api/notion";
+
+const QUESTIONS = [
+  {id:"q1_moderno_tradicional",      l:"Modernos",                 r:"Tradicionales",       s:"Somos más"},
+  {id:"q2_independiente_teamplayer", l:"Independientes",           r:"Team Players",        s:null},
+  {id:"q3_rigido_flexible",          l:"Rígidos",                  r:"Flexibles",           s:null},
+  {id:"q4_humano_tech",              l:"Humanos",                  r:"Tech",                s:null},
+  {id:"q5_wellness_clinicos",        l:"Wellness",                 r:"Clínicos",            s:null},
+  {id:"q6_cercano_funcional",        l:"Cercanos",                 r:"Funcionales",         s:null},
+  {id:"q7_optimista_realista",       l:"Optimistas",               r:"Realistas",           s:null},
+  {id:"q8_playful_serio",            l:"Playful",                  r:"Serios",              s:null},
+  {id:"q9_transaccional_implicados", l:"Transaccional",            r:"Implicados",          s:"Nuestra forma de relacionarnos con los pacientes es"},
+  {id:"q10_puntual_sostenida",       l:"Puntual",                  r:"Sostenida",           s:null},
+  {id:"q11_personalizada_generica",  l:"Personalizada",            r:"Genérica",            s:null},
+  {id:"q12_instructiva_acompanante", l:"Instructiva",              r:"Acompañante",         s:null},
+  {id:"q14_programa_centromedico",   l:"Un programa de bienestar", r:"Un centro médico",    s:"Queremos que nos relacionen más con"},
+  {id:"q15_hombre_mujer",            l:"Hombre",                   r:"Mujer",               s:"Si Balance fuera una persona sería"},
+  {id:"q16_suave_firme",             l:"Suave",                    r:"Firme",               s:null},
+  {id:"q17_serio_animado",           l:"Seria",                    r:"Animada",             s:null},
+  {id:"q13_facilitadora_directiva",  l:"Facilitadora",             r:"Directiva",           s:null},
+  {id:"q18_metodica_intuitiva",       l:"Metódica",                 r:"Intuitiva",           s:null},
+  {id:"q19_libre_conservadora",       l:"Libre",                    r:"Conservadora",        s:null},
+];
+const TOTAL = QUESTIONS.length;
+let answers = {};
+
+// ── Build form ──
+const formEl = document.getElementById("form");
+let prevSection = null;
+QUESTIONS.forEach(q => {
+  if (q.s && q.s !== prevSection) {
+    if (prevSection !== null) {
+      const hr = document.createElement("hr");
+      hr.className = "sec-divider";
+      formEl.appendChild(hr);
+    }
+    const t = document.createElement("p");
+    t.className = "sec-title";
+    t.textContent = q.s;
+    formEl.appendChild(t);
+    prevSection = q.s;
+  }
+  const row = document.createElement("div");
+  row.className = "qrow";
+  row.innerHTML = `<div class="ql">${q.l}</div><div class="dots" id="dots-${q.id}"></div><div class="qr">${q.r}</div>`;
+  formEl.appendChild(row);
+  const dotsEl = document.getElementById("dots-"+q.id);
+  for (let v = 1; v <= 7; v++) {
+    const d = document.createElement("div");
+    d.className = "dot"; d.dataset.v = v;
+    d.setAttribute("tabindex","0"); d.setAttribute("role","radio");
+    d.addEventListener("click", () => pick(q.id, v));
+    d.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" ") pick(q.id, v); });
+    dotsEl.appendChild(d);
+  }
+});
+const submitArea = document.createElement("div");
+submitArea.className = "submit-area";
+submitArea.innerHTML = `<button class="submit-btn" id="submit-btn" disabled>Enviar <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+formEl.appendChild(submitArea);
+
+function pick(qid, v) {
+  answers[qid] = v;
+  document.querySelectorAll(`#dots-${qid} .dot`).forEach(d => {
+    d.classList.toggle("sel", parseInt(d.dataset.v) === v);
+  });
+  upd();
+}
+
+function upd() {
+  const done = Object.keys(answers).length;
+  document.getElementById("prog-fill").style.width = Math.round(done/TOTAL*100)+"%";
+  document.getElementById("prog-lbl").textContent = done+" / "+TOTAL;
+  document.getElementById("submit-btn").disabled = done < TOTAL;
+}
+
+// ── Proxy: save ──
+async function saveToNotion(ans) {
+  const num = new Date().toLocaleString("es-ES",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+  const body = { Respuesta: "Respuesta "+num };
+  QUESTIONS.forEach(q => { if (ans[q.id]) body[q.id] = ans[q.id]; });
+  const res = await fetch(API+"?action=save", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(await res.text());
+}
+
+// ── Proxy: load ──
+async function loadFromNotion() {
+  const res = await fetch(API+"?action=load");
+  if (!res.ok) throw new Error(await res.text());
+  const data = await res.json();
+  return data.results.map(page => {
+    const p = page.properties;
+    const row = { Respuesta: p.Respuesta?.title?.[0]?.plain_text || "—", Fecha: page.created_time };
+    QUESTIONS.forEach(q => { row[q.id] = p[q.id]?.number || null; });
+    return row;
+  });
+}
+
+// ── Submit ──
+document.getElementById("submit-btn").addEventListener("click", async () => {
+  const btn = document.getElementById("submit-btn");
+  btn.disabled = true;
+  btn.innerHTML = "Guardando…";
+  try {
+    await saveToNotion(answers);
+    document.getElementById("form").style.display = "none";
+    document.getElementById("prog").style.display = "none";
+    document.getElementById("success").classList.add("on");
+  } catch(e) {
+    console.error(e);
+    btn.innerHTML = `Enviar <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    btn.disabled = false;
+    alert("Error al guardar. Revisa la conexión e inténtalo de nuevo.");
+  }
+});
+
+// ── Ver respuestas ──
+let respVisible = false;
+document.getElementById("tog-btn").addEventListener("click", async () => {
+  const area = document.getElementById("resp-area");
+  if (respVisible) {
+    area.style.display = "none";
+    respVisible = false;
+    document.getElementById("tog-btn").textContent = "Ver respuestas del equipo";
+    return;
+  }
+  area.style.display = "block";
+  respVisible = true;
+  document.getElementById("tog-btn").textContent = "Ocultar respuestas";
+  const list = document.getElementById("resp-list");
+  list.innerHTML = '<p class="loading-msg">Cargando…</p>';
+  try {
+    const rows = await loadFromNotion();
+    if (!rows.length) { list.innerHTML = '<p class="loading-msg">Aún no hay respuestas</p>'; return; }
+    list.innerHTML = "";
+    rows.forEach((entry, i) => {
+      const w = document.createElement("div"); w.className = "rent";
+      const d = new Date(entry.Fecha).toLocaleDateString("es-ES",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+      w.innerHTML = `<div class="rname">${entry.Respuesta}  ·  ${d}</div>`;
+      QUESTIONS.forEach(q => {
+        const v = entry[q.id];
+        const rrow = document.createElement("div"); rrow.className = "rrow";
+        let rdots = "";
+        for (let j=1;j<=7;j++) rdots += `<div class="rdot${j===v?" sel":""}" data-v="${j}"></div>`;
+        rrow.innerHTML = `<div class="rl">${q.l}</div><div class="rdots">${rdots}</div><div class="rr">${q.r}</div>`;
+        w.appendChild(rrow);
+      });
+      list.appendChild(w);
+    });
+  } catch(e) {
+    list.innerHTML = '<p class="error-msg">Error cargando respuestas</p>';
+    console.error(e);
+  }
+});
+</script>
+</body>
+</html>
