@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,7 +10,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0b0b0b;color:#fff;font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{max-width:680px;margin:0 auto;padding:48px 24px 100px}
-.logo{display:flex;align-items:flex-start;margin-bottom:56px}
+
 .prog{position:sticky;top:0;background:#0b0b0b;padding:12px 0 16px;z-index:10;margin-bottom:32px}
 .prog-track{height:1.5px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
 .prog-fill{height:100%;background:#fefa8f;width:0%;transition:width .3s ease;border-radius:2px}
@@ -77,14 +76,20 @@ body{background:#0b0b0b;color:#fff;font-family:'Archivo',sans-serif;-webkit-font
 .comment-box{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(254,250,143,0.25);color:#fff;font-family:'Archivo',sans-serif;font-weight:300;font-size:16px;line-height:1.6;padding:8px 0;resize:none;outline:none;transition:border-color .2s;min-height:80px}
 .comment-box:focus{border-color:rgba(254,250,143,0.7)}
 .comment-box::placeholder{color:rgba(255,255,255,0.18)}
+
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:56px}
+.logo{display:flex;align-items:flex-start}
+.lang-toggle{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#0b0b0b;background:#fefa8f;border:none;padding:7px 16px;cursor:pointer;transition:opacity .15s}
+.lang-toggle:hover{opacity:0.8}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="logo">
+  <div class="header">
     <svg width="130" height="17" viewBox="144 11 92 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M166.084 15.0737C167.216 15.0738 168.158 15.239 168.907 15.5688C169.673 15.8823 170.249 16.3364 170.632 16.9302C171.015 17.524 171.206 18.2424 171.206 19.0835V25.6909C171.206 26.0043 171.282 26.2279 171.432 26.3599C171.598 26.4915 171.79 26.5571 172.006 26.5571H172.905V28.2896C172.706 28.372 172.456 28.4552 172.156 28.5376C171.857 28.6201 171.506 28.6606 171.106 28.6606C170.657 28.6606 170.273 28.5785 169.957 28.4136C169.657 28.2651 169.407 28.0504 169.207 27.77C169.024 27.4732 168.9 27.1425 168.833 26.7798H168.683C168.383 27.1591 168.016 27.4975 167.583 27.7944C167.167 28.0748 166.683 28.2895 166.134 28.438C165.584 28.6029 164.968 28.686 164.285 28.686C163.869 28.686 163.418 28.6365 162.936 28.5376C162.453 28.4386 161.994 28.2565 161.562 27.9927C161.145 27.7287 160.804 27.3656 160.537 26.9038C160.271 26.4254 160.138 25.806 160.138 25.0474C160.138 24.1569 160.346 23.4225 160.762 22.8452C161.178 22.268 161.762 21.8138 162.511 21.4839C163.26 21.1541 164.152 20.9235 165.185 20.7915C166.234 20.6596 167.375 20.5933 168.607 20.5933V19.3062C168.607 18.8775 168.533 18.4973 168.383 18.1675C168.25 17.8379 167.991 17.5823 167.608 17.4009C167.242 17.2194 166.708 17.1285 166.009 17.1284C165.31 17.1285 164.76 17.2196 164.36 17.4009C163.978 17.5657 163.702 17.7797 163.535 18.0435C163.385 18.2908 163.311 18.564 163.311 18.8608V19.2319H160.812C160.796 19.1498 160.787 19.067 160.787 18.9849V18.687C160.787 17.9119 161.004 17.2597 161.437 16.7319C161.886 16.1877 162.511 15.775 163.311 15.4946C164.11 15.2143 165.035 15.0737 166.084 15.0737ZM184.921 15.0737C186.053 15.0738 186.996 15.2389 187.745 15.5688C188.511 15.8823 189.086 16.3365 189.469 16.9302C189.852 17.524 190.043 18.2424 190.043 19.0835V25.6909C190.043 26.0043 190.119 26.2279 190.269 26.3599C190.435 26.4915 190.627 26.5571 190.843 26.5571H191.742V28.2896C191.542 28.372 191.293 28.4552 190.993 28.5376C190.693 28.6201 190.343 28.6606 189.943 28.6606C189.494 28.6606 189.11 28.5784 188.794 28.4136C188.494 28.2651 188.245 28.0503 188.045 27.77C187.862 27.4732 187.737 27.1426 187.67 26.7798H187.52C187.22 27.159 186.854 27.4976 186.421 27.7944C186.005 28.0747 185.521 28.2895 184.972 28.438C184.422 28.6029 183.805 28.686 183.122 28.686C182.706 28.686 182.256 28.6365 181.773 28.5376C181.29 28.4386 180.831 28.2566 180.398 27.9927C179.982 27.7288 179.64 27.3655 179.374 26.9038C179.108 26.4254 178.975 25.806 178.975 25.0474C178.975 24.1568 179.183 23.4225 179.6 22.8452C180.016 22.268 180.599 21.8138 181.349 21.4839C182.098 21.1542 182.989 20.9234 184.021 20.7915C185.071 20.6596 186.213 20.5933 187.445 20.5933V19.3062C187.445 18.8775 187.37 18.4973 187.22 18.1675C187.086 17.8379 186.828 17.5823 186.445 17.4009C186.079 17.2195 185.546 17.1285 184.847 17.1284C184.147 17.1284 183.597 17.2196 183.197 17.4009C182.815 17.5657 182.54 17.7799 182.373 18.0435C182.223 18.2908 182.148 18.564 182.147 18.8608V19.2319H179.649C179.633 19.1498 179.624 19.067 179.624 18.9849V18.687C179.624 17.9119 179.841 17.2597 180.273 16.7319C180.723 16.1877 181.348 15.775 182.147 15.4946C182.947 15.2143 183.872 15.0738 184.921 15.0737ZM212.051 15.0737C212.95 15.0738 213.733 15.1895 214.399 15.4204C215.065 15.6349 215.632 15.9653 216.099 16.4106C216.565 16.8395 216.907 17.3759 217.123 18.019C217.356 18.6623 217.473 19.3975 217.473 20.2222H214.85C214.85 19.5296 214.75 18.9595 214.55 18.5142C214.35 18.0689 214.041 17.7384 213.625 17.5239C213.209 17.293 212.667 17.1783 212.001 17.1782C211.302 17.1782 210.71 17.3426 210.227 17.6724C209.744 17.9858 209.378 18.4736 209.128 19.1333C208.878 19.7766 208.753 20.6266 208.753 21.6821V22.103C208.753 23.1091 208.869 23.9511 209.103 24.6274C209.352 25.2871 209.719 25.7819 210.202 26.1118C210.702 26.4251 211.335 26.5825 212.101 26.5825C212.767 26.5825 213.301 26.4668 213.7 26.2358C214.116 25.9884 214.424 25.641 214.624 25.1958C214.84 24.7341 214.949 24.1814 214.949 23.5386H217.473C217.473 24.3136 217.356 25.0154 217.123 25.6421C216.907 26.2686 216.565 26.8131 216.099 27.2749C215.649 27.7203 215.082 28.0675 214.399 28.3149C213.717 28.5623 212.925 28.686 212.025 28.686C210.71 28.686 209.61 28.4466 208.728 27.9683C207.845 27.4734 207.178 26.7225 206.729 25.7163C206.296 24.71 206.079 23.4309 206.079 21.8804C206.079 20.3297 206.304 19.0587 206.754 18.0688C207.204 17.0627 207.87 16.3118 208.753 15.8169C209.652 15.3222 210.752 15.0737 212.051 15.0737ZM225.303 15.0737C226.552 15.0738 227.594 15.3131 228.427 15.7915C229.276 16.2534 229.918 16.9638 230.351 17.9204C230.783 18.8772 231 20.0822 231 21.5337V22.5229H221.78C221.814 23.4467 221.955 24.2232 222.205 24.8501C222.455 25.4603 222.83 25.9145 223.329 26.2114C223.845 26.4918 224.496 26.6313 225.278 26.6313C225.761 26.6313 226.194 26.5739 226.577 26.4585C226.96 26.3265 227.285 26.1444 227.552 25.9136C227.818 25.6662 228.027 25.3771 228.177 25.0474C228.326 24.7012 228.401 24.3128 228.401 23.8843H230.95C230.95 24.6594 230.816 25.3452 230.55 25.939C230.283 26.5326 229.892 27.0364 229.376 27.4487C228.876 27.8445 228.276 28.1493 227.577 28.3638C226.878 28.5782 226.102 28.686 225.253 28.686C223.904 28.686 222.771 28.4465 221.855 27.9683C220.956 27.4734 220.273 26.7224 219.807 25.7163C219.34 24.71 219.107 23.4309 219.106 21.8804C219.106 20.3132 219.34 19.0333 219.807 18.0435C220.273 17.0376 220.964 16.2952 221.88 15.8169C222.796 15.3222 223.937 15.0738 225.303 15.0737ZM153.231 11.4116C154.181 11.4117 155.014 11.5847 155.73 11.9312C156.446 12.2611 157.005 12.74 157.404 13.3667C157.82 13.9934 158.028 14.7279 158.028 15.5688C158.028 16.212 157.904 16.7989 157.654 17.3267C157.421 17.8544 157.087 18.2997 156.654 18.6626C156.238 19.0254 155.763 19.2975 155.23 19.479V19.5786C155.847 19.7106 156.397 19.958 156.88 20.3208C157.379 20.6671 157.771 21.1295 158.054 21.7065C158.353 22.2673 158.504 22.9444 158.504 23.7358C158.504 24.8079 158.262 25.6915 157.779 26.3843C157.313 27.077 156.688 27.5885 155.905 27.9185C155.123 28.2319 154.231 28.3891 153.231 28.3892H144.137V11.4116H153.231ZM177.137 28.3892H174.538V11.5181H177.137V28.3892ZM200.223 15.0737C201.055 15.0738 201.789 15.2231 202.422 15.52C203.055 15.8005 203.547 16.2626 203.896 16.9058C204.263 17.5491 204.445 18.416 204.445 19.5044V28.3892H201.848V19.8999C201.848 19.4053 201.781 18.9924 201.647 18.6626C201.531 18.333 201.356 18.0685 201.123 17.8706C200.89 17.6727 200.614 17.5322 200.298 17.4497C199.982 17.3673 199.632 17.3267 199.249 17.3267C198.65 17.3267 198.099 17.4752 197.6 17.772C197.117 18.0524 196.725 18.4483 196.425 18.9595C196.125 19.4708 195.976 20.0734 195.976 20.7661V28.3892H193.377V15.3706H195.525L195.751 17.2271H195.926C196.242 16.749 196.617 16.3529 197.05 16.0396C197.483 15.7263 197.958 15.4867 198.474 15.3218C199.006 15.1569 199.59 15.0738 200.223 15.0737ZM168.607 22.4243C167.458 22.4243 166.45 22.4906 165.584 22.6226C164.718 22.7545 164.043 23.0021 163.561 23.3647C163.078 23.7111 162.836 24.1981 162.836 24.8247C162.836 25.204 162.919 25.5266 163.086 25.7905C163.252 26.0377 163.502 26.228 163.835 26.3599C164.168 26.4918 164.56 26.5571 165.01 26.5571C165.526 26.5571 166.001 26.4828 166.434 26.3345C166.883 26.1695 167.267 25.9468 167.583 25.6665C167.899 25.3697 168.15 25.0231 168.333 24.6274C168.516 24.2152 168.607 23.7687 168.607 23.2905V22.4243ZM187.445 22.4243C186.296 22.4243 185.288 22.4907 184.422 22.6226C183.556 22.7545 182.88 23.002 182.397 23.3647C181.915 23.7111 181.673 24.1982 181.673 24.8247C181.673 25.204 181.756 25.5266 181.923 25.7905C182.089 26.0378 182.34 26.2279 182.673 26.3599C183.006 26.4916 183.397 26.5571 183.847 26.5571C184.363 26.5571 184.839 26.4829 185.271 26.3345C185.721 26.1695 186.105 25.9468 186.421 25.6665C186.737 25.3698 186.987 25.023 187.17 24.6274C187.353 24.2152 187.445 23.7687 187.445 23.2905V22.4243ZM146.935 26.0132H153.007C153.773 26.013 154.398 25.8153 154.881 25.4194C155.38 25.007 155.63 24.346 155.63 23.439C155.63 22.895 155.522 22.4325 155.306 22.0532C155.106 21.6575 154.797 21.3605 154.381 21.1626C153.965 20.9482 153.439 20.8404 152.807 20.8403H146.935V26.0132ZM225.253 17.1528C224.554 17.1529 223.954 17.2767 223.454 17.5239C222.971 17.7713 222.597 18.1595 222.33 18.687C222.064 19.1983 221.897 19.8506 221.83 20.6421H228.276C228.276 19.9992 228.202 19.4624 228.052 19.0337C227.919 18.5886 227.718 18.2252 227.452 17.9448C227.186 17.6646 226.869 17.4666 226.503 17.3511C226.137 17.2191 225.719 17.1529 225.253 17.1528ZM146.935 18.5142H152.582C153.115 18.5141 153.573 18.4152 153.956 18.2173C154.339 18.0193 154.63 17.7383 154.83 17.3755C155.046 17.0128 155.155 16.6086 155.155 16.1636C155.155 15.3555 154.93 14.7608 154.48 14.3813C154.048 13.9856 153.473 13.7877 152.757 13.7876H146.935V18.5142Z" fill="#fefa8f"/>
     </svg>
+    <button class="lang-toggle" id="lang-btn">EN</button>
   </div>
 
   <div class="prog" id="prog">
@@ -107,6 +112,143 @@ body{background:#0b0b0b;color:#fff;font-family:'Archivo',sans-serif;-webkit-font
 
 <script>
 const API = "/api/notion";
+let lang = "es";
+
+const I18N = {
+  es: {
+    sections: {
+      "Somos más": "Somos más",
+      "Nuestra forma de relacionarnos con los pacientes es": "Nuestra forma de relacionarnos con los pacientes es",
+      "Queremos que nos relacionen más con": "Queremos que nos relacionen más con",
+      "Si Balance fuera una persona sería": "Si Balance fuera una persona sería",
+    },
+    questions: {
+      q1_moderno_tradicional:      ["Modernos","Tradicionales"],
+      q2_independiente_teamplayer: ["Independientes","Team Players"],
+      q3_rigido_flexible:          ["Rígidos","Flexibles"],
+      q4_humano_tech:              ["Humanos","Tech"],
+      q5_wellness_clinicos:        ["Wellness","Clínicos"],
+      q6_cercano_funcional:        ["Cercanos","Funcionales"],
+      q7_optimista_realista:       ["Optimistas","Realistas"],
+      q8_playful_serio:            ["Playful","Serios"],
+      q9_transaccional_implicados: ["Transaccional","Implicados"],
+      q10_puntual_sostenida:       ["Puntual","Sostenida"],
+      q11_personalizada_generica:  ["Personalizada","Genérica"],
+      q12_pedagogica_practica:     ["Pedagógica","Práctica"],
+      q14_programa_centromedico:   ["Un programa de bienestar","Un centro médico"],
+      q15_hombre_mujer:            ["Hombre","Mujer"],
+      q16_suave_firme:             ["Suave","Firme"],
+      q17_serio_animado:           ["Seria","Animada"],
+      q13_facilitadora_directiva:  ["Facilitadora","Directiva"],
+      q18_metodica_intuitiva:      ["Metódica","Intuitiva"],
+      q19_libre_conservadora:      ["Libre","Conservadora"],
+    },
+    progress: (d,t) => `${d} / ${t}`,
+    comment_label: "¿Añadirías algo?",
+    comment_placeholder: "Escribe aquí lo que no cabe en las dualidades…",
+    submit: "Enviar",
+    saving: "Guardando…",
+    suc_title: "Gracias :)",
+    suc_sub: "Tu visión de Balance queda registrada",
+    tog_show: "Ver respuestas del equipo",
+    tog_hide: "Ocultar respuestas",
+    resp_hdr: "Respuestas registradas",
+    loading: "Cargando…",
+    error_save: "Error al guardar. Revisa la conexión e inténtalo de nuevo.",
+    error_load: "Error cargando respuestas",
+    no_resp: "Aún no hay respuestas",
+    lang_btn: "EN",
+  },
+  en: {
+    sections: {
+      "Somos más": "We are more",
+      "Nuestra forma de relacionarnos con los pacientes es": "Our way of relating to patients is",
+      "Queremos que nos relacionen más con": "We want people to associate us more with",
+      "Si Balance fuera una persona sería": "If Balance were a person, they would be",
+    },
+    questions: {
+      q1_moderno_tradicional:      ["Modern","Traditional"],
+      q2_independiente_teamplayer: ["Independent","Team Player"],
+      q3_rigido_flexible:          ["Rigid","Flexible"],
+      q4_humano_tech:              ["Human","Tech"],
+      q5_wellness_clinicos:        ["Wellness","Clinical"],
+      q6_cercano_funcional:        ["Close","Functional"],
+      q7_optimista_realista:       ["Optimistic","Realistic"],
+      q8_playful_serio:            ["Playful","Serious"],
+      q9_transaccional_implicados: ["Transactional","Involved"],
+      q10_puntual_sostenida:       ["One-time","Ongoing"],
+      q11_personalizada_generica:  ["Personalised","Generic"],
+      q12_pedagogica_practica:     ["Pedagogical","Practical"],
+      q14_programa_centromedico:   ["A wellness programme","A medical centre"],
+      q15_hombre_mujer:            ["Man","Woman"],
+      q16_suave_firme:             ["Gentle","Firm"],
+      q17_serio_animado:           ["Serious","Lively"],
+      q13_facilitadora_directiva:  ["Facilitating","Directive"],
+      q18_metodica_intuitiva:      ["Methodical","Intuitive"],
+      q19_libre_conservadora:      ["Free","Conservative"],
+    },
+    progress: (d,t) => `${d} / ${t}`,
+    comment_label: "Anything to add?",
+    comment_placeholder: "Write here what doesn't fit in the dualities…",
+    submit: "Submit",
+    saving: "Saving…",
+    suc_title: "Thank you :)",
+    suc_sub: "Your vision of Balance has been recorded",
+    tog_show: "See team responses",
+    tog_hide: "Hide responses",
+    resp_hdr: "Recorded responses",
+    loading: "Loading…",
+    error_save: "Error saving. Check your connection and try again.",
+    error_load: "Error loading responses",
+    no_resp: "No responses yet",
+    lang_btn: "ES",
+  }
+};
+
+function t() { return I18N[lang]; }
+
+function applyLang() {
+  const tx = t();
+  // section titles
+  document.querySelectorAll('.sec-title').forEach(el => {
+    const key = Object.keys(I18N.es.sections).find(k => Object.values(I18N.es.sections).includes(el.dataset.key || el.textContent.trim()) || el.dataset.key === k);
+    if (el.dataset.key) el.textContent = tx.sections[el.dataset.key] || el.dataset.key;
+  });
+  // question labels
+  QUESTIONS.forEach(q => {
+    const row = document.querySelector(`[data-qid="${q.id}"]`);
+    if (!row) return;
+    const [l, r] = tx.questions[q.id] || [q.id, q.id];
+    row.querySelector('.ql').textContent = l;
+    row.querySelector('.qr').textContent = r;
+  });
+  // comment
+  const lbl = document.querySelector('.comment-label');
+  if (lbl) lbl.textContent = tx.comment_label;
+  const box = document.getElementById('comentario');
+  if (box) box.placeholder = tx.comment_placeholder;
+  // submit btn
+  const btn = document.getElementById('submit-btn');
+  if (btn && !btn.disabled) btn.innerHTML = `${tx.submit} <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  // progress
+  const done = Object.keys(answers).length;
+  document.getElementById('prog-lbl').textContent = tx.progress(done, TOTAL);
+  // success screen
+  const sucTitle = document.querySelector('.suc-title');
+  if (sucTitle) sucTitle.textContent = tx.suc_title;
+  const sucSub = document.querySelector('.suc-sub');
+  if (sucSub) sucSub.textContent = tx.suc_sub;
+  // resp header
+  const respHdr = document.querySelector('.resp-hdr');
+  if (respHdr) respHdr.textContent = tx.resp_hdr;
+  // lang button
+  document.getElementById('lang-btn').textContent = tx.lang_btn;
+}
+
+document.getElementById('lang-btn').addEventListener('click', () => {
+  lang = lang === 'es' ? 'en' : 'es';
+  applyLang();
+});
 
 const QUESTIONS = [
   {id:"q1_moderno_tradicional",      l:"Modernos",                 r:"Tradicionales",       s:"Somos más"},
@@ -143,12 +285,14 @@ QUESTIONS.forEach(q => {
     }
     const t = document.createElement("p");
     t.className = "sec-title";
+    t.dataset.key = q.s;
     t.textContent = q.s;
     formEl.appendChild(t);
     prevSection = q.s;
   }
   const row = document.createElement("div");
   row.className = "qrow";
+  row.dataset.qid = q.id;
   row.innerHTML = `<div class="ql">${q.l}</div><div class="dots" id="dots-${q.id}"></div><div class="qr">${q.r}</div>`;
   formEl.appendChild(row);
   const dotsEl = document.getElementById("dots-"+q.id);
@@ -183,7 +327,7 @@ function pick(qid, v) {
 function upd() {
   const done = Object.keys(answers).length;
   document.getElementById("prog-fill").style.width = Math.round(done/TOTAL*100)+"%";
-  document.getElementById("prog-lbl").textContent = done+" / "+TOTAL;
+  document.getElementById("prog-lbl").textContent = t().progress(done, TOTAL);
   document.getElementById("submit-btn").disabled = done < TOTAL;
 }
 
@@ -216,7 +360,7 @@ async function loadFromNotion() {
 document.getElementById("submit-btn").addEventListener("click", async () => {
   const btn = document.getElementById("submit-btn");
   btn.disabled = true;
-  btn.innerHTML = "Guardando…";
+  btn.innerHTML = t().saving;
   try {
     await saveToNotion(answers);
     document.getElementById("form").style.display = "none";
@@ -226,7 +370,7 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
     console.error(e);
     btn.innerHTML = `Enviar <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     btn.disabled = false;
-    alert("Error al guardar. Revisa la conexión e inténtalo de nuevo.");
+    alert(t().error_save);
   }
 });
 
@@ -235,16 +379,16 @@ document.getElementById("tog-btn").addEventListener("click", async () => {
   const area = document.getElementById("resp-area");
   if (respVisible) {
     area.style.display = "none"; respVisible = false;
-    document.getElementById("tog-btn").textContent = "Ver respuestas del equipo";
+    document.getElementById("tog-btn").textContent = t().tog_show;
     return;
   }
   area.style.display = "block"; respVisible = true;
-  document.getElementById("tog-btn").textContent = "Ocultar respuestas";
+  document.getElementById("tog-btn").textContent = t().tog_hide;
   const list = document.getElementById("resp-list");
-  list.innerHTML = '<p class="loading-msg">Cargando…</p>';
+  list.innerHTML = `<p class="loading-msg">${t().loading}</p>`;
   try {
     const rows = await loadFromNotion();
-    if (!rows.length) { list.innerHTML = '<p class="loading-msg">Aún no hay respuestas</p>'; return; }
+    if (!rows.length) { list.innerHTML = `<p class="loading-msg">${t().no_resp}</p>`; return; }
     list.innerHTML = "";
     rows.forEach((entry, i) => {
       const w = document.createElement("div"); w.className = "rent";
@@ -261,7 +405,7 @@ document.getElementById("tog-btn").addEventListener("click", async () => {
       list.appendChild(w);
     });
   } catch(e) {
-    list.innerHTML = '<p class="error-msg">Error cargando respuestas</p>';
+    list.innerHTML = `<p class="error-msg">${t().error_load}</p>`;
   }
 });
 </script>
